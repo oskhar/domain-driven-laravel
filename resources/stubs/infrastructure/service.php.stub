@@ -1,0 +1,29 @@
+<?php
+
+namespace App\Infrastructure\Services;
+
+use Illuminate\Http\Request;
+
+class {{ class }}
+{
+    protected Request $request;
+
+    /**
+     * Create a new service instance.
+     * @param \Illuminate\Http\Request $request
+     */
+    public function __construct(Request $request)
+    {
+        $this->request = $request;
+    }
+
+    /**
+     * Service main program.
+     *
+     * @return mixed
+     */
+    public function __invoke(): mixed
+    {
+        //
+    }
+}

@@ -1,0 +1,17 @@
+<?php
+
+namespace {{ namespace }};
+
+{{ baseClassImport }}
+
+class {{ class }}{{ extends }}
+{
+    /**
+     * Atribut atau kolom yang boleh diubah.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+
+    ];
+}

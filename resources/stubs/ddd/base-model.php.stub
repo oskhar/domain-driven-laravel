@@ -1,0 +1,13 @@
+<?php
+
+namespace {{ namespace }};
+
+use Lunarstorm\LaravelDDD\Factories\HasDomainFactory;
+use Illuminate\Database\Eloquent\Model;
+
+abstract class {{ class }} extends Model
+{
+    use HasDomainFactory;
+
+    protected $guarded = [];
+}

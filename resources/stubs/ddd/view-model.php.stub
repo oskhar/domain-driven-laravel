@@ -1,0 +1,13 @@
+<?php
+
+namespace {{ namespace }};
+
+{{ baseClassImport }}
+
+class {{ class }}{{ extends }}
+{
+    public function __construct()
+    {
+        //
+    }
+}

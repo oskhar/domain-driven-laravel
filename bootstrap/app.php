@@ -57,7 +57,7 @@ return Application::configure(basePath: dirname(__DIR__))
                 APIResponseData::from([
                     "status" => false,
                     "errors" => [
-                        "Ayyo, looks like your backend is designing the wrong array structure",
+                        "Ayyo, looks like your backend messed up the array structure.",
                         $exception->getMessage()
                     ]
                 ]),
@@ -70,7 +70,7 @@ return Application::configure(basePath: dirname(__DIR__))
                 APIResponseData::from([
                     "status" => false,
                     "errors" => [
-                        "Are you sure backend bro?",
+                        "Are you sure backend bro? The method you called doesn't exist.",
                         $exception->getMessage()
                     ]
                 ]),
@@ -113,7 +113,7 @@ return Application::configure(basePath: dirname(__DIR__))
                     APIResponseData::from([
                         "status" => false,
                         "errors" => $errors ?? [
-                            "Your backend is dumb bro",
+                            "Your backend is dumb, bro.",
                             $exception->getMessage()
                         ]
                     ]),

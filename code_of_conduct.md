@@ -2,7 +2,7 @@
 
 ## 📝 Introduction
 
-We, as contributors and maintainers of the **Web-Posyandu-Data-Management-MultiVersion** project, are committed to fostering an open and welcoming environment where all participants feel respected, valued, and supported. This Code of Conduct outlines our expectations for participants' behavior as well as the consequences for unacceptable behavior.
+We, as contributors and maintainers of the **Domain-Driven Laravel 🛸 🔃** project, are committed to fostering an open and welcoming environment where all participants feel respected, valued, and supported. This Code of Conduct outlines our expectations for participants' behavior as well as the consequences for unacceptable behavior.
 
 ## 🙏 Our Pledge
 

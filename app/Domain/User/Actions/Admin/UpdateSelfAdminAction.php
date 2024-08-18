@@ -3,14 +3,11 @@
 namespace Domain\User\Actions\Admin;
 
 use App\Infrastructure\API\Data\APIResponseData;
-use App\Infrastructure\API\Enums\APIStatusEnum;
-use App\Infrastructure\Exceptions\APIResponseException;
 use App\Infrastructure\Services\APIResponseService;
 use App\Infrastructure\Services\SaveBase64ImageService;
 use Domain\User\Data\AdminData;
 use Domain\User\Data\UserData;
 use Domain\User\Models\Admin;
-use Domain\User\Models\JobTitle;
 use Domain\User\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;

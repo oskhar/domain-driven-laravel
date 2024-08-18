@@ -37,10 +37,7 @@ class GetWithTrashedAdminAction
         $result = $this->execute($filter);
 
         return ($this->response)(
-            APIResponseData::from([
-                "data" => $result["data"],
-                "pagination" => $result["pagination"]
-            ])
+            APIResponseData::from($result)
         );
     }
 

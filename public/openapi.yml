@@ -1,13 +1,12 @@
 openapi: "3.0.2"
 info:
-  title: API Posyandu Melati
+  title: Domain-Driven Laravel
   version: "2.0"
 components:
   securitySchemes:
     BearerAuth:
       type: http
       scheme: bearer
-      bearerFormat: JWT
 security:
   - BearerAuth: []
 servers:
@@ -49,14 +48,18 @@ paths:
                 message: "Login successful."
                 data:
                   admin:
+                    id: "integer"
                     full_name: "string"
-                    email: "email"
+                    email: "string|email"
+                    gender: "enum:male,female,L,P"
+                    language: "enum:en,id"
                     job_title: "string"
-                    profile_picture: "link"
-                    gender: "L|P"
-                    address: "string"
+                    profile_picture: "string"
+                    phone_number: "string|numberformat"
+                    address: "text"
                     birth_date: "date"
-                    phone_number: "string"
+                    created_at: "datetime"
+                    last_active_at: "datetime"
                   token:
                     access_token: "string"
                     expires_at: "date"
@@ -111,7 +114,7 @@ paths:
             application/json:
               example:
                 status: false
-                message: "Your request can't travel beyond the space-time boundary!"
+                message: "Your request violates the Sacred Timeline and cannot be fulfilled!"
                 errors: "array<string>"
                 meta:
                   request_id: "string"
@@ -134,7 +137,8 @@ paths:
                     id: "integer"
                     full_name: "string"
                     email: "string|email"
-                    gender: "enum:L,P"
+                    gender: "enum:male,female,L,P"
+                    language: "enum:en,id"
                     job_title: "string"
                     profile_picture: "string"
                     phone_number: "string|numberformat"
@@ -161,7 +165,7 @@ paths:
             application/json:
               example:
                 status: false
-                message: "Your request can't travel beyond the space-time boundary!"
+                message: "Your request violates the Sacred Timeline and cannot be fulfilled!"
                 errors: "array<string>"
                 meta:
                   request_id: "string"
@@ -199,7 +203,7 @@ paths:
             application/json:
               example:
                 status: false
-                message: "Your request can't travel beyond the space-time boundary!"
+                message: "Your request violates the Sacred Timeline and cannot be fulfilled!"
                 errors: "array<string>"
                 meta:
                   request_id: "string"
@@ -264,7 +268,7 @@ paths:
             application/json:
               example:
                 status: false
-                message: "Your request can't travel beyond the space-time boundary!"
+                message: "Your request violates the Sacred Timeline and cannot be fulfilled!"
                 errors: "array<string>"
                 meta:
                   request_id: "string"
@@ -317,11 +321,18 @@ paths:
                 data:
                   admin:
                     <array>:
+                      id: "integer"
                       full_name: "string"
-                      profile_picture: "link"
-                      gender: "L|P"
+                      email: "string|email"
+                      gender: "enum:male,female,L,P"
+                      language: "enum:en,id"
+                      job_title: "string"
+                      profile_picture: "string"
+                      phone_number: "string|numberformat"
+                      address: "text"
                       birth_date: "date"
-                      phone_number: "string"
+                      created_at: "datetime"
+                      last_active_at: "datetime"
                   pagination:
                     total: "integer"
                     per_page: "integer"
@@ -363,7 +374,7 @@ paths:
             application/json:
               example:
                 status: false
-                message: "Your request can't travel beyond the space-time boundary!"
+                message: "Your request violates the Sacred Timeline and cannot be fulfilled!"
                 errors: "array<string>"
                 meta:
                   request_id: "string"
@@ -413,24 +424,56 @@ paths:
           description: CREATED
           content:
             application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: object
-                    properties:
-                      message:
-                        type: string
               example:
-                success:
-                  message: "Data ... berhasil ditambahkan"
+                status: true
+                message: "New entity launched into the cosmos."
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
         400:
           description: BAD REQUEST
           content:
             application/json:
               example:
-                errors:
-                  message: "Data ... tidak valid"
+                status: false
+                message: "Your request veered off course and couldn't escape Earth's gravity!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        401:
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your credentials don't pass the cosmic gatekeeper!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        403:
+          description: FORBIDDEN
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your request violates the Sacred Timeline and cannot be fulfilled!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        409:
+          description: CONFLICT
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Collision in the cosmic pathways! Your request encountered a space-time conflict."
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
     put:
       tags:
         - Admin Data
@@ -471,31 +514,45 @@ paths:
           description: OK
           content:
             application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: object
-                    properties:
-                      message:
-                        type: string
               example:
-                success:
-                  message: "Data ... berhasil diubah"
+                status: true
+                message: "Success! Your request has safely landed back to Earth."
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
         400:
           description: BAD REQUEST
           content:
             application/json:
               example:
-                errors:
-                  message: "Data ... tidak valid"
-        404:
-          description: NOT FOUND
+                status: false
+                message: "Your request veered off course and couldn't escape Earth's gravity!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        401:
+          description: UNAUTHORIZED
           content:
             application/json:
               example:
-                errors:
-                  message: "Data dengan id ... tidak ditemukan"
+                status: false
+                message: "Your credentials don't pass the cosmic gatekeeper!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        403:
+          description: FORBIDDEN
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your request violates the Sacred Timeline and cannot be fulfilled!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
   /admin/with-trashed:
     get:
       tags:
@@ -543,7 +600,7 @@ paths:
                     <array>:
                       full_name: "string"
                       profile_picture: "link"
-                      gender: "L|P"
+                      gender: "enum:male,female,L,P"
                       birth_date: "date"
                       phone_number: "string"
                   pagination:
@@ -587,7 +644,7 @@ paths:
             application/json:
               example:
                 status: false
-                message: "Your request can't travel beyond the space-time boundary!"
+                message: "Your request violates the Sacred Timeline and cannot be fulfilled!"
                 errors: "array<string>"
                 meta:
                   request_id: "string"
@@ -642,7 +699,7 @@ paths:
             application/json:
               example:
                 status: false
-                message: "Your request can't travel beyond the space-time boundary!"
+                message: "Your request violates the Sacred Timeline and cannot be fulfilled!"
                 errors: "array<string>"
                 meta:
                   request_id: "string"
@@ -674,24 +731,56 @@ paths:
           description: CREATED
           content:
             application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: object
-                    properties:
-                      message:
-                        type: string
               example:
-                success:
-                  message: "Data ... berhasil ditambahkan"
+                status: true
+                message: "New entity launched into the cosmos."
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
         400:
           description: BAD REQUEST
           content:
             application/json:
               example:
-                errors:
-                  message: "Data ... tidak valid"
+                status: false
+                message: "Your request veered off course and couldn't escape Earth's gravity!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        401:
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your credentials don't pass the cosmic gatekeeper!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        403:
+          description: FORBIDDEN
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your request violates the Sacred Timeline and cannot be fulfilled!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        404:
+          description: NOT FOUND
+          content:
+            application/json:
+              example:
+                status: false
+                message: "The data you're seeking is beyond the bounds of space!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
   /admin/{id}/destroy:
     delete:
       tags:
@@ -731,7 +820,7 @@ paths:
             application/json:
               example:
                 status: false
-                message: "Your request can't travel beyond the space-time boundary!"
+                message: "Your request violates the Sacred Timeline and cannot be fulfilled!"
                 errors: "array<string>"
                 meta:
                   request_id: "string"
@@ -759,10 +848,22 @@ paths:
         content:
           application/json:
             example:
-              full_name: "string|required"
-              email: "email|required|unique"
-              birth_date: "date|required"
-              phone_number: "string|required"
+              example:
+                full_name: "Siti Nurhaliza"
+                email: "siti.nurhaliza@example.com"
+                password: "Siti1234"
+                gender: "P"
+                language: "id"
+                phone_number: "081234567890"
+                birth_date: "1990-05-21"
+              rule:
+                full_name: "required|string"
+                email: "required|string|email"
+                password: "required|string|min:8|regex:/[A-Z]/|regex:/[a-z]/|regex:/[0-9]/"
+                gender: "required|enum:L,P"
+                language: "enum:id,en"
+                phone_number: "string|numberformat"
+                birth_date: "date"
       responses:
         201:
           description: CREATED
@@ -812,13 +913,17 @@ paths:
                 message: "Login successful."
                 data:
                   member:
+                    id: "integer"
                     full_name: "string"
-                    email: "email"
-                    profile_picture: "link"
-                    gender: "L|P"
+                    email: "string|email"
+                    gender: "enum:male,female,L,P"
+                    language: "enum:en,id"
+                    profile_picture: "string"
+                    phone_number: "string|numberformat"
                     birth_date: "date"
-                    phone_number: "string"
                     poin: "integer"
+                    created_at: "datetime"
+                    last_active_at: "datetime"
                   token:
                     access_token: "string"
                     expires_at: "date"
@@ -873,7 +978,7 @@ paths:
             application/json:
               example:
                 status: false
-                message: "Your request can't travel beyond the space-time boundary!"
+                message: "Your request violates the Sacred Timeline and cannot be fulfilled!"
                 errors: "array<string>"
                 meta:
                   request_id: "string"
@@ -893,13 +998,16 @@ paths:
                 message: "Get self MEMBER data successful."
                 data:
                   member:
+                    id: "integer"
                     full_name: "string"
-                    email: "email"
-                    profile_picture: "link"
-                    gender: "L|P"
+                    email: "string|email"
+                    gender: "enum:male,female,L,P"
+                    language: "enum:en,id"
+                    profile_picture: "string"
+                    phone_number: "string|numberformat"
                     birth_date: "date"
-                    phone_number: "string"
                     poin: "integer"
+                    created_at: "datetime"
                 meta:
                   request_id: "string"
                   response_size: "integer|byte"
@@ -920,7 +1028,7 @@ paths:
             application/json:
               example:
                 status: false
-                message: "Your request can't travel beyond the space-time boundary!"
+                message: "Your request violates the Sacred Timeline and cannot be fulfilled!"
                 errors: "array<string>"
                 meta:
                   request_id: "string"
@@ -958,7 +1066,7 @@ paths:
             application/json:
               example:
                 status: false
-                message: "Your request can't travel beyond the space-time boundary!"
+                message: "Your request violates the Sacred Timeline and cannot be fulfilled!"
                 errors: "array<string>"
                 meta:
                   request_id: "string"
@@ -1023,7 +1131,7 @@ paths:
             application/json:
               example:
                 status: false
-                message: "Your request can't travel beyond the space-time boundary!"
+                message: "Your request violates the Sacred Timeline and cannot be fulfilled!"
                 errors: "array<string>"
                 meta:
                   request_id: "string"
@@ -1074,11 +1182,17 @@ paths:
                 data:
                   member:
                     <array>:
+                      id: "integer"
                       full_name: "string"
-                      profile_picture: "link"
-                      gender: "L|P"
+                      email: "string|email"
+                      gender: "enum:male,female,L,P"
+                      language: "enum:en,id"
+                      profile_picture: "string"
+                      phone_number: "string|numberformat"
                       birth_date: "date"
-                      phone_number: "string"
+                      poin: "integer"
+                      created_at: "datetime"
+                      last_active_at: "datetime"
                   pagination:
                     total: "integer"
                     per_page: "integer"
@@ -1120,7 +1234,7 @@ paths:
             application/json:
               example:
                 status: false
-                message: "Your request can't travel beyond the space-time boundary!"
+                message: "Your request violates the Sacred Timeline and cannot be fulfilled!"
                 errors: "array<string>"
                 meta:
                   request_id: "string"

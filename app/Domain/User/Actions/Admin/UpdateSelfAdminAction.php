@@ -11,7 +11,6 @@ use Domain\User\Models\Admin;
 use Domain\User\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Lorisleiva\Actions\Concerns\AsAction;
 
 class UpdateSelfAdminAction
@@ -56,9 +55,7 @@ class UpdateSelfAdminAction
         $user = User::findOrFail(Auth::user()->id);
 
         if (!empty($data['profile_picture']) && $data['profile_picture'] != $user['profile_picture'])
-            $data['profile_picture'] = ($this->saveImage)(
-                $data['profile_picture']
-            );
+            $data['profile_picture'] = ($this->saveImage)($data['profile_picture']);
 
         $user->update(
             UserData::from($data)->toArray()

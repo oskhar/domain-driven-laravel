@@ -33,15 +33,15 @@ Feel free to explore the repository and the provided documentation to get the mo
 
 ## Table Of Contents
 
--   [💻 Application Overview](documents/application-overview.md)
--   [⚙️ Project Standards](documents/project-standards.md)
--   [🗄️ Project Structure](documents/project-structure.md)
--   [🧱 Components and Architecture](documents/components-and-architecture.md)
--   [📡 API Layer](documents/api-layer.md)
--   [📦 Domain Layer](documents/domain-layer.md)
--   [🧪 Testing](documents/testing.md)
--   [⚠️ Error Handling](documents/error-handling.md)
--   [🔐 Security](documents/security.md)
+-   [💻 Application Overview](docs/application-overview.md)
+-   [⚙️ Project Standards](docs/project-standards.md)
+-   [🗄️ Project Structure](docs/project-structure.md)
+-   [🧱 Components and Architecture](docs/components-and-architecture.md)
+-   [📡 API Layer](docs/api-layer.md)
+-   [📦 Domain Layer](docs/domain-layer.md)
+-   [🧪 Testing](docs/testing.md)
+-   [⚠️ Error Handling](docs/error-handling.md)
+-   [🔐 Security](docs/security.md)
 
 ## Who is This Template For?
 
@@ -53,7 +53,10 @@ This template is ideal for Laravel developers who.
 
 ## Contributing
 
-Contributions are welcome! Please submit a pull request or open an issue to discuss any changes.
+Contributions are welcome! Please submit a pull request or open an issue to discuss any changes.For further questions, issues, or discussions, please open an issue on GitHub or contact the project maintainers.
+
+We appreciate your contributions and look forward to seeing how you can help enhance Domain-Driven Laravel!
+email: [muhamadoskhar@gmail.com](mailto:muhamadoskhar@gmail.com)
 
 ## License
 

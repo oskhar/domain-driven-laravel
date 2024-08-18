@@ -1,6 +1,4 @@
-# 🧱 Components and Architecture
-
-## Commands and Customization
+# 🧱 Commands and Customization
 
 ### Overview of Command Components
 

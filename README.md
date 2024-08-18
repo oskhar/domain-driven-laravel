@@ -36,7 +36,7 @@ Feel free to explore the repository and the provided documentation to get the mo
 -   [💻 Application Overview](docs/application-overview.md)
 -   [⚙️ Project Standards](docs/project-standards.md)
 -   [🗄️ Project Structure](docs/project-structure.md)
--   [🧱 Components and Architecture](docs/components-and-architecture.md)
+-   [🧱 Commands and Customization](docs/commands-and-costumization.md)
 -   [📡 API Layer](docs/api-layer.md)
 -   [📦 Domain Layer](docs/domain-layer.md)
 -   [🧪 Testing](docs/testing.md)

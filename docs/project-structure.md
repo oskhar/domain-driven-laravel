@@ -37,10 +37,10 @@ app
 │   ├── Exceptions            # Infrastructure-level exceptions
 │   ├── Middleware            # HTTP middleware for request and response handling
 │   └── Services              # Services related to infrastructure concerns
-└── resources
-    └── stubs                 # Customizable stubs for generating project files
-        ├── ddd               # Stubs for domain-driven design classes
-        └── infrastructure    # Stubs for infrastructure-related classes
+resources
+└── stubs                     # Customizable stubs for generating project files
+    ├── ddd                   # Stubs for domain-driven design classes
+    └── infrastructure        # Stubs for infrastructure-related classes
 ```
 
 ## Domain

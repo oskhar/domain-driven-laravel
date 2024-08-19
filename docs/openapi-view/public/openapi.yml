@@ -1,0 +1,1252 @@
+openapi: "3.0.2"
+info:
+  title: Domain-Driven Laravel
+  version: "2.0"
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+security:
+  - BearerAuth: []
+servers:
+  - url: http://localhost:8000/api/v1
+tags:
+  - name: Admin Authentication
+    description: For admin authentication
+  - name: Admin Data
+    description: For managing admin data
+  - name: Member Authentication
+    description: For Member authentication
+  - name: Member Data
+    description: For managing member data
+paths:
+  /admin/login:
+    post:
+      tags:
+        - Admin Authentication
+      summary: for GUEST
+      requestBody:
+        content:
+          application/json:
+            example:
+              example:
+                email: "admin@example.com"
+                password: "TesPassword123"
+                remember_me: false
+              rule:
+                email: "required|email"
+                password: "required|string"
+                remember_me: "boolean"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              example:
+                status: true
+                message: "Login successful."
+                data:
+                  admin:
+                    id: "integer"
+                    full_name: "string"
+                    email: "string|email"
+                    gender: "enum:male,female,L,P"
+                    language: "enum:en,id"
+                    job_title: "string"
+                    profile_picture: "string"
+                    phone_number: "string|numberformat"
+                    address: "text"
+                    birth_date: "date"
+                    created_at: "datetime"
+                    last_active_at: "datetime"
+                  token:
+                    access_token: "string"
+                    expires_at: "date"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        400:
+          description: BAD REQUEST
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your request veered off course and couldn't escape Earth's gravity!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+  /admin/refresh:
+    post:
+      tags:
+        - Admin Authentication
+      summary: need ADMIN Authentication
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              example:
+                status: true
+                message: "Refresh access token successful."
+                data:
+                  token:
+                    access_token: "string"
+                    expires_at: "date"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        401:
+          description: UNAUTHORIZE
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your credentials don't pass the cosmic gatekeeper!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        403:
+          description: FORBIDDEN
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your request violates the Sacred Timeline and cannot be fulfilled!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+  /admin/me:
+    post:
+      tags:
+        - Admin Authentication
+      summary: need ADMIN Authentication
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              example:
+                status: true
+                message: "Get self admin data successful."
+                data:
+                  admin:
+                    id: "integer"
+                    full_name: "string"
+                    email: "string|email"
+                    gender: "enum:male,female,L,P"
+                    language: "enum:en,id"
+                    job_title: "string"
+                    profile_picture: "string"
+                    phone_number: "string|numberformat"
+                    address: "text"
+                    birth_date: "date"
+                    created_at: "datetime"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        401:
+          description: UNAUTHORIZE
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your credentials don't pass the cosmic gatekeeper!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        403:
+          description: FORBIDDEN
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your request violates the Sacred Timeline and cannot be fulfilled!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+  /admin/logout:
+    post:
+      tags:
+        - Admin Authentication
+      summary: need ADMIN Authentication
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              example:
+                status: true
+                message: "Logout successful."
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        401:
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your credentials don't pass the cosmic gatekeeper!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        403:
+          description: FORBIDDEN
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your request violates the Sacred Timeline and cannot be fulfilled!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+  /admin/reset-password:
+    post:
+      tags:
+        - Admin Authentication
+      summary: need ADMIN Authentication
+      requestBody:
+        content:
+          application/json:
+            example:
+              example:
+                old_password: "TesPassword123"
+                new_password: "UbahPassword9"
+                new_password_confirmation: "UbahPassword9"
+              example_backup:
+                old_password: "UbahPassword9"
+                new_password: "TesPassword123"
+                new_password_confirmation: "TesPassword123"
+              rule:
+                old_password: "string|required|min:8|regex:/[A-Z]/|regex:/[a-z]/|regex:/[0-9]/"
+                new_password: "string|required|min:8|regex:/[A-Z]/|regex:/[a-z]/|regex:/[0-9]/"
+                new_password_confirmation: "string|required|min:8|regex:/[A-Z]/|regex:/[a-z]/|regex:/[0-9]/"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              example:
+                status: true
+                message: "Success! Your request has safely landed back to Earth."
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        400:
+          description: BAD REQUEST
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your request veered off course and couldn't escape Earth's gravity!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        401:
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your credentials don't pass the cosmic gatekeeper!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        403:
+          description: FORBIDDEN
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your request violates the Sacred Timeline and cannot be fulfilled!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+
+  # ===============================================
+
+  /admin:
+    get:
+      tags:
+        - Admin Data
+      summary: need ADMIN Authentication
+      parameters:
+        - name: length
+          in: query
+          required: true
+          schema:
+            type: integer
+            default: 5
+        - name: page
+          in: query
+          required: true
+          schema:
+            type: integer
+            default: 1
+        - name: search
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: sort
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - terbaru
+              - terlama
+              - a-z
+              - z-a
+            default: terbaru
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              example:
+                status: true
+                message: "Success! Your request has safely landed back to Earth."
+                data:
+                  admin:
+                    <array>:
+                      id: "integer"
+                      full_name: "string"
+                      email: "string|email"
+                      gender: "enum:male,female,L,P"
+                      language: "enum:en,id"
+                      job_title: "string"
+                      profile_picture: "string"
+                      phone_number: "string|numberformat"
+                      address: "text"
+                      birth_date: "date"
+                      created_at: "datetime"
+                      last_active_at: "datetime"
+                  pagination:
+                    total: "integer"
+                    per_page: "integer"
+                    current_page: "integer"
+                    total_pages: "integer"
+                    links:
+                      next: "string"
+                      prev: "string"
+                      first: "string"
+                      last: "string"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        400:
+          description: BAD REQUEST
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your request veered off course and couldn't escape Earth's gravity!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        401:
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your credentials don't pass the cosmic gatekeeper!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        403:
+          description: FORBIDDEN
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your request violates the Sacred Timeline and cannot be fulfilled!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        404:
+          description: NOT FOUND
+          content:
+            application/json:
+              example:
+                status: false
+                message: "The data you're seeking is beyond the bounds of space!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+    post:
+      tags:
+        - Admin Data
+      summary: need ADMIN Spesific Job Title Authenticaiton
+      requestBody:
+        content:
+          application/json:
+            example:
+              example:
+                full_name: "Budi Santoso"
+                email: "budi.santoso@example.com"
+                password: "123Tesdoang"
+                gender: "L"
+                job_title: "BENDAHARA"
+                language: "id"
+                profile_picture: "null"
+                phone_number: "082345678901"
+                address: "Jl. Sudirman No.45, Surabaya, Jawa Timur, 60271"
+                birth_date: "1992-06-21"
+              rule:
+                full_name: "required|string"
+                email: "required|string|email"
+                password: "required|string|min:8|regex:/[A-Z]/|regex:/[a-z]/|regex:/[0-9]/"
+                gender: "required|enum:L,P"
+                job_title: "required|string"
+                language: "enum:id,en"
+                phone_number: "string|numberformat"
+                address: "text"
+                birth_date: "date"
+      responses:
+        201:
+          description: CREATED
+          content:
+            application/json:
+              example:
+                status: true
+                message: "New entity launched into the cosmos."
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        400:
+          description: BAD REQUEST
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your request veered off course and couldn't escape Earth's gravity!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        401:
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your credentials don't pass the cosmic gatekeeper!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        403:
+          description: FORBIDDEN
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your request violates the Sacred Timeline and cannot be fulfilled!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        409:
+          description: CONFLICT
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Collision in the cosmic pathways! Your request encountered a space-time conflict."
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+    put:
+      tags:
+        - Admin Data
+      summary: need ADMIN Authentication
+      requestBody:
+        content:
+          application/json:
+            example:
+              example:
+                full_name: "John Doe"
+                gender: "P"
+                job_title: "SEKRETARIS"
+                language: "en"
+                profile_picture: null
+                phone_number: "9876543210"
+                address: "456 Example Ave, Example City, Example State, 67890"
+                birth_date: "1985-05-15"
+              example_backup:
+                full_name: "Admin User"
+                gender: "L"
+                job_title: "KETUA"
+                language: "id"
+                profile_picture: null
+                phone_number: "1234567890"
+                address: "123 Admin St, Admin City, Admin State, 12345"
+                birth_date: "1990-01-01"
+              rule:
+                full_name: "required|string"
+                email: "required|string|email"
+                gender: "required|enum:L,P"
+                job_title: "required|string"
+                profile_picture: "string|Base64"
+                phone_number: "string|numberformat"
+                address: "text"
+                birth_date: "date"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              example:
+                status: true
+                message: "Success! Your request has safely landed back to Earth."
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        400:
+          description: BAD REQUEST
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your request veered off course and couldn't escape Earth's gravity!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        401:
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your credentials don't pass the cosmic gatekeeper!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        403:
+          description: FORBIDDEN
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your request violates the Sacred Timeline and cannot be fulfilled!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+  /admin/with-trashed:
+    get:
+      tags:
+        - Admin Data
+      summary: need ADMIN Spesific Job Title Authenticaiton
+      parameters:
+        - name: length
+          in: query
+          required: true
+          schema:
+            type: integer
+            default: 5
+        - name: page
+          in: query
+          required: true
+          schema:
+            type: integer
+            default: 1
+        - name: search
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: sort
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - terbaru
+              - terlama
+              - a-z
+              - z-a
+            default: terbaru
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              example:
+                status: true
+                message: "Success! Your request has safely landed back to Earth."
+                data:
+                  admin:
+                    <array>:
+                      full_name: "string"
+                      profile_picture: "link"
+                      gender: "enum:male,female,L,P"
+                      birth_date: "date"
+                      phone_number: "string"
+                  pagination:
+                    total: "integer"
+                    per_page: "integer"
+                    current_page: "integer"
+                    total_pages: "integer"
+                    links:
+                      next: "string"
+                      prev: "string"
+                      first: "string"
+                      last: "string"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        400:
+          description: BAD REQUEST
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your request veered off course and couldn't escape Earth's gravity!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        401:
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your credentials don't pass the cosmic gatekeeper!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        403:
+          description: FORBIDDEN
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your request violates the Sacred Timeline and cannot be fulfilled!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        404:
+          description: NOT FOUND
+          content:
+            application/json:
+              example:
+                status: false
+                message: "The data you're seeking is beyond the bounds of space!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+  /admin/{id}:
+    delete:
+      tags:
+        - Admin Data
+      summary: need ADMIN Spesific Job Title Authenticaiton
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              example:
+                status: true
+                message: "Success! Your request has safely landed back to Earth."
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        401:
+          description: UNAUTHORIZE
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your credentials don't pass the cosmic gatekeeper!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        403:
+          description: FORBIDDEN
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your request violates the Sacred Timeline and cannot be fulfilled!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        404:
+          description: NOT FOUND
+          content:
+            application/json:
+              example:
+                status: false
+                message: "The data you're seeking is beyond the bounds of space!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+  /admin/{id}/recover:
+    post:
+      tags:
+        - Admin Data
+      summary: need ADMIN Spesific Job Title Authenticaiton
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        201:
+          description: CREATED
+          content:
+            application/json:
+              example:
+                status: true
+                message: "New entity launched into the cosmos."
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        400:
+          description: BAD REQUEST
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your request veered off course and couldn't escape Earth's gravity!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        401:
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your credentials don't pass the cosmic gatekeeper!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        403:
+          description: FORBIDDEN
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your request violates the Sacred Timeline and cannot be fulfilled!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        404:
+          description: NOT FOUND
+          content:
+            application/json:
+              example:
+                status: false
+                message: "The data you're seeking is beyond the bounds of space!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+  /admin/{id}/destroy:
+    delete:
+      tags:
+        - Admin Data
+      summary: need ADMIN Spesific Job Title Authenticaiton
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              example:
+                status: true
+                message: "Success! Your request has safely landed back to Earth."
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        401:
+          description: UNAUTHORIZE
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your credentials don't pass the cosmic gatekeeper!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        403:
+          description: FORBIDDEN
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your request violates the Sacred Timeline and cannot be fulfilled!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        404:
+          description: NOT FOUND
+          content:
+            application/json:
+              example:
+                status: false
+                message: "The data you're seeking is beyond the bounds of space!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+
+  # ===============================================
+
+  /member/register:
+    post:
+      tags:
+        - Member Authentication
+      summary: for GUEST
+      requestBody:
+        content:
+          application/json:
+            example:
+              example:
+                full_name: "Siti Nurhaliza"
+                email: "siti.nurhaliza@example.com"
+                password: "Siti1234"
+                gender: "P"
+                language: "id"
+                phone_number: "081234567890"
+                birth_date: "1990-05-21"
+              rule:
+                full_name: "required|string"
+                email: "required|string|email"
+                password: "required|string|min:8|regex:/[A-Z]/|regex:/[a-z]/|regex:/[0-9]/"
+                gender: "required|enum:L,P"
+                language: "enum:id,en"
+                phone_number: "string|numberformat"
+                birth_date: "date"
+      responses:
+        201:
+          description: CREATED
+          content:
+            application/json:
+              example:
+                status: true
+                message: "Registration successful."
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        400:
+          description: BAD REQUEST
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your request veered off course and couldn't escape Earth's gravity!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+  /member/login:
+    post:
+      tags:
+        - Member Authentication
+      summary: for GUEST
+      requestBody:
+        content:
+          application/json:
+            example:
+              example:
+                email: "member@example.com"
+                password: "TesMember123"
+                remember_me: false
+              rule:
+                email: "required|email"
+                password: "required|string"
+                remember_me: "boolean"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              example:
+                status: true
+                message: "Login successful."
+                data:
+                  member:
+                    id: "integer"
+                    full_name: "string"
+                    email: "string|email"
+                    gender: "enum:male,female,L,P"
+                    language: "enum:en,id"
+                    profile_picture: "string"
+                    phone_number: "string|numberformat"
+                    birth_date: "date"
+                    poin: "integer"
+                    created_at: "datetime"
+                    last_active_at: "datetime"
+                  token:
+                    access_token: "string"
+                    expires_at: "date"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        400:
+          description: BAD REQUEST
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your request veered off course and couldn't escape Earth's gravity!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+  /member/refresh:
+    post:
+      tags:
+        - Member Authentication
+      summary: need MEMBER Authentication
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              example:
+                status: true
+                message: "Refresh access token successful."
+                data:
+                  token:
+                    access_token: "string"
+                    expires_at: "date"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        401:
+          description: UNAUTHORIZE
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your credentials don't pass the cosmic gatekeeper!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        403:
+          description: FORBIDDEN
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your request violates the Sacred Timeline and cannot be fulfilled!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+  /member/me:
+    post:
+      tags:
+        - Member Authentication
+      summary: need MEMBER Authentication
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              example:
+                status: true
+                message: "Get self MEMBER data successful."
+                data:
+                  member:
+                    id: "integer"
+                    full_name: "string"
+                    email: "string|email"
+                    gender: "enum:male,female,L,P"
+                    language: "enum:en,id"
+                    profile_picture: "string"
+                    phone_number: "string|numberformat"
+                    birth_date: "date"
+                    poin: "integer"
+                    created_at: "datetime"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        401:
+          description: UNAUTHORIZE
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your credentials don't pass the cosmic gatekeeper!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        403:
+          description: FORBIDDEN
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your request violates the Sacred Timeline and cannot be fulfilled!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+  /member/logout:
+    post:
+      tags:
+        - Member Authentication
+      summary: need MEMBER Authentication
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              example:
+                status: true
+                message: "Logout successful."
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        401:
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your credentials don't pass the cosmic gatekeeper!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        403:
+          description: FORBIDDEN
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your request violates the Sacred Timeline and cannot be fulfilled!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+  /member/reset-password:
+    post:
+      tags:
+        - Member Authentication
+      summary: MELAKUKAN perubahan password
+      requestBody:
+        content:
+          application/json:
+            example:
+              example:
+                old_password: "TesMember123"
+                new_password: "TesPassword124"
+                new_password_confirmation: "TesPassword124"
+              example_backup:
+                old_password: "TesPassword1234"
+                new_password: "TesMember123"
+                new_password_confirmation: "TesMember123"
+              rule:
+                old_password: "string|required|min:8|regex:/[A-Z]/|regex:/[a-z]/|regex:/[0-9]/"
+                new_password: "string|required|min:8|regex:/[A-Z]/|regex:/[a-z]/|regex:/[0-9]/"
+                new_password_confirmation: "string|required|min:8|regex:/[A-Z]/|regex:/[a-z]/|regex:/[0-9]/"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              example:
+                status: true
+                message: "Success! Your request has safely landed back to Earth."
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        400:
+          description: BAD REQUEST
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your request veered off course and couldn't escape Earth's gravity!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        401:
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your credentials don't pass the cosmic gatekeeper!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        403:
+          description: FORBIDDEN
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your request violates the Sacred Timeline and cannot be fulfilled!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+
+  # ===============================================
+
+  /member:
+    get:
+      tags:
+        - Member Data
+      summary: need ADMIN Authentication
+      parameters:
+        - name: length
+          in: query
+          required: true
+          schema:
+            type: integer
+        - name: page
+          in: query
+          required: true
+          schema:
+            type: integer
+        - name: search
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: sort
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - terbaru
+              - terlama
+              - a-z
+              - z-a
+            default: terbaru
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              example:
+                status: true
+                message: "Success! Your request has safely landed back to Earth."
+                data:
+                  member:
+                    <array>:
+                      id: "integer"
+                      full_name: "string"
+                      email: "string|email"
+                      gender: "enum:male,female,L,P"
+                      language: "enum:en,id"
+                      profile_picture: "string"
+                      phone_number: "string|numberformat"
+                      birth_date: "date"
+                      poin: "integer"
+                      created_at: "datetime"
+                      last_active_at: "datetime"
+                  pagination:
+                    total: "integer"
+                    per_page: "integer"
+                    current_page: "integer"
+                    total_pages: "integer"
+                    links:
+                      next: "string"
+                      prev: "string"
+                      first: "string"
+                      last: "string"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        400:
+          description: BAD REQUEST
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your request veered off course and couldn't escape Earth's gravity!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        401:
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your credentials don't pass the cosmic gatekeeper!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        403:
+          description: FORBIDDEN
+          content:
+            application/json:
+              example:
+                status: false
+                message: "Your request violates the Sacred Timeline and cannot be fulfilled!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"
+        404:
+          description: NOT FOUND
+          content:
+            application/json:
+              example:
+                status: false
+                message: "The data you're seeking is beyond the bounds of space!"
+                errors: "array<string>"
+                meta:
+                  request_id: "string"
+                  response_size: "integer|byte"

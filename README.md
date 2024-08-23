@@ -4,6 +4,8 @@
 
 A robust, scalable, and flexible architecture for developing RESTful APIs with Laravel using Domain-Driven Design (DDD) principles.
 
+[📘 Article](https://dev.to/oskhar/domain-driven-laravel-build-great-systems-that-are-scalable-and-powerful-4458)
+
 ## Introduction
 
 Laravel is an excellent framework for building Powerfull Apps, offering a rich set of features and a clean syntax. However, as projects grow in complexity, it's easy for the codebase to become unmanageable. The absence of a clear architectural pattern can lead to a mix of responsibilities, making the code harder to maintain and scale.
@@ -50,6 +52,12 @@ This template is ideal for Laravel developers who.
 -   Want to adopt Domain-Driven Design (DDD) principles.
 -   Are building complex applications requiring clean architecture and maintainability.
 -   Need a scalable solution for managing domain logic, services, and middleware.
+
+## Managing API Documentation
+
+When using this project, you have flexibility in how you manage your API documentation. If you prefer, you can delete the docs folder entirely. Although API documentation files exist there, you’ll find that the `public` folder also contains API documentation, which is automatically served at http://localhost:8000 when you run your Laravel application.
+
+This means you can focus solely on updating the `public/openapi.yml` file for your API documentation. Alternatively, if you prefer working within the docs folder, you can maintain your OpenAPI documentation in `docs/openapi-view/public/openapi.yml`. The choice is yours, allowing you to manage your API documentation in the way that best suits your workflow.
 
 ## Contributing
 

@@ -61,7 +61,3 @@ Contributions are welcome! Please submit a pull request or open an issue to disc
 
 We appreciate your contributions and look forward to seeing how you can help enhance Domain-Driven Laravel!
 email: [muhamadoskhar@gmail.com](mailto:muhamadoskhar@gmail.com)
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).

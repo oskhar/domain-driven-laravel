@@ -29,11 +29,11 @@ This template is ideal for Laravel developers who are building complex applicati
 
 ### Key Features:
 
--   Domain-Driven Design (DDD) Principles: Ensures maintainable and scalable code, making it easier to manage and grow your application.
--   Clean Architecture: Provides a clear separation of concerns with distinct layers for infrastructure, domain, and application logic.
--   Pre-configured Commands: Includes commands for generating middleware and service classes within the Infrastructure layer, streamlining development processes.
--   Customizable Stubs: Predefined stubs allow you to easily generate custom classes, adapting the template to your specific needs.
--   Extensible Structure: Supports the growth and complexity of your application, ensuring long-term maintainability.
+-   Domain-Driven Design (DDD) Principles. Ensures maintainable and scalable code, making it easier to manage and grow your application.
+-   Clean Architecture. Provides a clear separation of concerns with distinct layers for infrastructure, domain, and application logic.
+-   Pre-configured Commands. Includes commands for generating middleware and service classes within the Infrastructure layer, streamlining development processes.
+-   Customizable Stubs. Predefined stubs allow you to easily generate custom classes, adapting the template to your specific needs.
+-   Extensible Structure. Supports the growth and complexity of your application, ensuring long-term maintainability.
 
 Feel free to explore the repository and the provided documentation to get the most out of this template.
 
